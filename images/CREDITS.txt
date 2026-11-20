@@ -1,0 +1,13 @@
+Stock photos on this site are from Unsplash, used under the Unsplash License
+(https://unsplash.com/license): free to use, no attribution required.
+Credit is listed here anyway.
+
+svc-all-subjects.jpg  Kimberly Farmer        https://unsplash.com/photos/lUaaKCUANVI
+svc-uts-prep.jpg      Nguyen Dang Hoang Nhu  https://unsplash.com/photos/cbEvoHbJnIE
+svc-gifted.jpg        Piotr Makowski         https://unsplash.com/photos/27LH_0jXKYI
+svc-science.jpg       Indra Projects         https://unsplash.com/photos/FUw4bGuv9X4
+why-homework.jpg      Rishi                  https://unsplash.com/photos/rYwsJLyhvC4
+how-desk.jpg          Karla Vidal            https://unsplash.com/photos/D8AKryd6tBE
+toronto.jpg           Jochem Raat            https://unsplash.com/photos/s0grRYEDaL4
+
+hugo.jpg and ryan.jpg are our own photos.

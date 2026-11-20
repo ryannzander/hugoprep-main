@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Account | HugoPrep</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/theme.css" />
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="lg-hugo">Hugo</span><span class="lg-prep">Prep</span></a>
+    <div class="nav-cta">
+      <span id="userEmailLabel" style="font-size:.88rem;color:var(--ink-soft);font-weight:600;margin-right:4px;"></span>
+      <button class="btn btn-ghost" id="logoutBtn">Log Out</button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+  <div class="wrap" style="max-width:760px">
+
+    <!-- Not connected to backend yet -->
+    <div id="notConfigured" style="display:none">
+      <div class="shell-head">
+        <h1>My Account</h1>
+      </div>
+      <div class="card" id="notConfiguredCard"></div>
+    </div>
+
+    <!-- Loading -->
+    <div id="loadingState" class="loading-spin">Loading your account...</div>
+
+    <!-- Pending approval -->
+    <div id="pendingState" style="display:none">
+      <div class="shell-head">
+        <h1>Waiting for Approval</h1>
+        <p>Your account is created. Here's what's next.</p>
+      </div>
+      <div class="card">
+        <span class="status-badge pending"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Pending Approval</span>
+        <h3 style="font-size:1.3rem;margin-bottom:10px">Book your free 15-minute intro first</h3>
+        <p style="color:var(--ink-soft);margin-bottom:18px">Before you can book a paid tutoring session, we need a quick free intro call together, no cost, no pressure.</p>
+        <a href="https://calendly.com/hugobprep/free-initial-meeting" target="_blank" rel="noopener" class="btn btn-primary" style="margin-bottom:22px">
+          Book Your Free 15-Min Intro
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p style="font-size:.88rem;color:var(--ink-faint);border-top:1px solid var(--line);padding-top:16px">
+          <strong>Why the wait?</strong> Approval for booking real tutoring sessions is only given to students who have already completed their free 15-minute intro call and want to move forward working with Hugo. Already had your call? Your account will be approved shortly, this page will automatically unlock your booking calendar once that happens.
+        </p>
+      </div>
+    </div>
+
+    <!-- Approved -->
+    <div id="approvedState" style="display:none">
+      <div class="shell-head">
+        <h1 id="approvedHeading">Book a session</h1>
+        <p id="approvedSub">You're approved! Pick a time below for your tutoring session.</p>
+      </div>
+      <div class="card" style="padding:12px">
+        <span class="status-badge approved" style="margin:12px 0 0 12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M20 6 9 17l-5-5"/></svg> Approved</span>
+        <div class="calendly-inline-widget calendly-embed" data-url="https://calendly.com/hugombui/30min?hide_gdpr_banner=1"></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="simple">© <span id="year"></span> HugoPrep · Toronto, Ontario</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const loadingState = document.getElementById('loadingState');
+  const pendingState = document.getElementById('pendingState');
+  const approvedState = document.getElementById('approvedState');
+  const notConfigured = document.getElementById('notConfigured');
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    if (isSupabaseConfigured) await supabaseClient.auth.signOut();
+    window.location.href = 'login.html';
+  });
+
+  (async () => {
+    if (!isSupabaseConfigured) {
+      loadingState.style.display = 'none';
+      notConfigured.style.display = 'block';
+      document.getElementById('notConfiguredCard').innerHTML =
+        '<p style="color:var(--ink-soft)">This page isn\'t connected to the account system yet. (Missing Supabase project URL/key in <code>js/supabase-client.js</code>.) Once that\'s set up, logged-in students will see their booking status here.</p>';
+      return;
+    }
+
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    document.getElementById('userEmailLabel').textContent = session.user.email;
+
+    const { data: profile, error } = await supabaseClient
+      .from('profiles')
+      .select('approved, first_session_used')
+      .eq('id', session.user.id)
+      .single();
+
+    loadingState.style.display = 'none';
+
+    if (error || !profile) {
+      pendingState.style.display = 'block';
+      return;
+    }
+
+    if (profile.approved) {
+      approvedState.style.display = 'block';
+    } else {
+      pendingState.style.display = 'block';
+    }
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<!-- Accounts are paused (2026-11-20). Remove the next line to bring login and signup back. -->
+<meta http-equiv="refresh" content="0; url=index.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Log In | HugoPrep</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/theme.css" />
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="lg-hugo">Hugo</span><span class="lg-prep">Prep</span></a>
+    <div class="nav-cta">
+      <a href="index.html" class="btn btn-ghost">Back to site</a>
+    </div>
+  </div>
+</header>
+
+<main class="auth-wrap">
+  <div class="auth-card">
+    <span class="eyebrow"><span class="dot"></span> Welcome Back</span>
+    <h1 style="margin-top:14px">Log in to HugoPrep</h1>
+    <p class="auth-sub">Log in to book your tutoring sessions and manage your account.</p>
+
+    <div class="auth-msg" id="authMsg"></div>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="you@email.com" required autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Your password" required autocomplete="current-password" />
+      </div>
+      <button type="submit" class="btn btn-primary" id="submitBtn">Log In</button>
+    </form>
+
+    <p class="auth-switch">Don't have an account? <a href="signup.html">Sign up</a></p>
+  </div>
+</main>
+
+<footer class="simple">© <span id="year"></span> HugoPrep · Toronto, Ontario</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const form = document.getElementById('loginForm');
+  const msgEl = document.getElementById('authMsg');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function showMsg(text, type) {
+    msgEl.textContent = text;
+    msgEl.className = 'auth-msg show ' + type;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msgEl.className = 'auth-msg';
+
+    if (!requireSupabaseOrWarn(msgEl)) return;
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Logging in...';
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Log In';
+
+    if (error) {
+      showMsg(error.message || 'Could not log you in. Check your email and password.', 'error');
+      return;
+    }
+
+    window.location.href = 'dashboard.html';
+  });
+
+  // If Supabase IS configured and the user is already logged in, skip straight to dashboard.
+  (async () => {
+    if (!isSupabaseConfigured) return;
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (session) window.location.href = 'dashboard.html';
+  })();
+</script>
+</body>
+</html>

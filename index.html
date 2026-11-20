@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<!-- HugoPrep: production -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HugoPrep | Tutoring Built for Students, by Top Students · Toronto</title>
+<meta name="description" content="Personalized tutoring for ages 6 to 14 in Toronto. All subjects, UTS entrance prep, gifted program prep, and science fair coaching with Hugo and Ryan, Grade 9 UTS students and 2026 Toronto Science Fair gold medalists. $40/hr. Book now for a chance to win your first hour free." />
+<meta name="theme-color" content="#0B0F19" />
+<meta property="og:title" content="HugoPrep | Tutoring built for students, by top students" />
+<meta property="og:description" content="All subjects, UTS prep, gifted prep, and science fair coaching. $40/hr. Book now for a chance to win your first hour free." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="images/hugo.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+<style>
+  /* ================= TOKENS ================= */
+  :root{
+    --bg:#FFFFFF;
+    --soft:#F5F6F8;
+    --card:#FFFFFF;
+    --ink:#0B0F19;
+    --ink-2:#414858;
+    --ink-3:#6B7280;
+    --blue:#2550E6;            /* the one accent: booking buttons and small details */
+    --blue-hover:#1B3FC4;
+    --blue-tint:#EDF1FF;
+    --blue-on-dark:#9DB2FF;
+    --line:rgba(11,15,25,.08);
+    --line-2:rgba(11,15,25,.14);
+    --sh-1:0 1px 2px rgba(11,15,25,.04),0 8px 24px -14px rgba(11,15,25,.12);
+    --sh-2:0 2px 6px rgba(11,15,25,.04),0 32px 64px -32px rgba(11,15,25,.28);
+    --r-1:10px; --r-2:14px; --r-3:20px; --r-4:28px;
+    --maxw:1160px;
+    --f-display:"Geist",system-ui,-apple-system,sans-serif;
+    --f-serif:"Instrument Serif",Georgia,serif;
+    --f-body:"Geist",system-ui,-apple-system,sans-serif;
+  }
+
+  /* ================= BASE ================= */
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;font-family:var(--f-body);font-size:17px;line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:clip}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none;margin:0;padding:0}
+  h1,h2,h3,h4{font-family:var(--f-display);font-weight:600;line-height:1.08;letter-spacing:-.035em;margin:0}
+  p{margin:0}
+  button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .sec{padding:120px 0}
+  .serif{font-family:var(--f-serif);font-weight:400;font-style:italic;letter-spacing:-.015em}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  b,strong{font-weight:600}
+
+  /* section heading */
+  .kicker{display:inline-block;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+  .s-head{max-width:640px;margin-bottom:56px}
+  .s-head h2{font-size:clamp(2.2rem,4.4vw,3.4rem);margin:14px 0 16px}
+  .s-head h2 .serif{font-size:1.1em}
+  .s-head p{font-size:1.1rem;color:var(--ink-2)}
+  .s-head.center{text-align:center;margin-left:auto;margin-right:auto}
+  .sec-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:64px;align-items:end;margin-bottom:56px}
+  .sec-top .s-head{margin-bottom:0}
+  .sec-pic{margin:0}
+  .sec-pic img{display:block;width:100%;height:auto;aspect-ratio:10/7;object-fit:cover;border-radius:var(--r-4);background:var(--soft)}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;font-weight:550;font-size:1rem;letter-spacing:-.01em;padding:14px 22px;border-radius:999px;transition:transform .18s ease,background .18s ease,box-shadow .18s ease,color .18s ease;white-space:nowrap;min-height:48px}
+  .btn svg{width:18px;height:18px;transition:transform .18s ease}
+  .btn:hover svg{transform:translateX(3px)}
+  .btn-cta{background:var(--blue);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 22px -12px rgba(37,80,230,.75)}
+  .btn-cta:hover{background:var(--blue-hover);transform:translateY(-1px)}
+  .btn-line{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-2)}
+  .btn-line:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+  .btn-lg{font-size:1.05rem;padding:17px 28px;min-height:56px}
+  .link-arrow{display:inline-flex;align-items:center;gap:.4em;font-weight:550;color:var(--ink);border-bottom:1px solid var(--line-2);padding-bottom:2px;transition:border-color .18s}
+  .link-arrow:hover{border-color:var(--ink)}
+
+  /* ================= ANNOUNCE + HEADER ================= */
+  .announce{background:var(--ink);color:#C9CEDA;font-size:.86rem;text-align:center;padding:10px 16px}
+  .announce b{color:#fff;font-weight:600}
+  .announce .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#5BD08F;margin-right:.6em;box-shadow:0 0 0 4px rgba(91,208,143,.18);vertical-align:1px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);border-bottom:1px solid transparent;transition:border-color .2s}
+  header.scrolled{border-bottom-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+  .logo{font-family:var(--f-display);font-weight:700;font-size:1.4rem;letter-spacing:-.045em;line-height:1;display:inline-flex}
+  .logo .h{color:var(--ink)} .logo .p{color:var(--blue)}
+  .nav-links{display:flex;gap:28px;font-size:.93rem;font-weight:500;color:var(--ink-2)}
+  .nav-links a{padding:6px 0;transition:color .15s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{display:flex;align-items:center;gap:8px}
+  .nav-cta .login{font-weight:550;font-size:.93rem;padding:11px 14px;border-radius:999px}
+  .nav-cta .login:hover{background:var(--soft)}
+  .nav-cta .btn{padding:11px 18px;min-height:42px;font-size:.93rem}
+  .hamburger{display:none;width:44px;height:44px;border-radius:12px;align-items:center;justify-content:center}
+  .hamburger span,.hamburger span::before,.hamburger span::after{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;position:relative;transition:.2s}
+  .hamburger span::before,.hamburger span::after{content:"";position:absolute;left:0}
+  .hamburger span::before{top:-6px}.hamburger span::after{top:6px}
+  body.menu-open .hamburger span{background:transparent}
+  body.menu-open .hamburger span::before{top:0;transform:rotate(45deg)}
+  body.menu-open .hamburger span::after{top:0;transform:rotate(-45deg)}
+  .mobile-menu{position:fixed;inset:0 0 auto 0;top:0;z-index:45;background:var(--bg);padding:116px 24px 32px;display:flex;flex-direction:column;gap:4px;transform:translateY(-102%);transition:transform .3s ease;box-shadow:var(--sh-2)}
+  body.menu-open .mobile-menu{transform:none}
+  .mobile-menu a{font-size:1.4rem;font-weight:600;letter-spacing:-.03em;padding:12px 0;border-bottom:1px solid var(--line)}
+  .mobile-menu .btn{margin-top:20px;font-size:1.05rem;letter-spacing:-.01em;border:0}
+  .mobile-menu .login-m{border:0;font-size:1.05rem;font-weight:550;letter-spacing:-.01em;text-align:center}
+
+  /* ================= HERO ================= */
+  .hero{position:relative;padding:72px 0 104px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(720px 420px at 88% -8%,var(--blue-tint),transparent 70%);pointer-events:none}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+  .tagline{display:inline-flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+  .chip{display:inline-flex;align-items:center;gap:.45em;font-size:.82rem;font-weight:500;padding:6px 12px;border-radius:999px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line-2);color:var(--ink-2)}
+  .chip svg{width:14px;height:14px;color:var(--blue)}
+  .hero h1{font-size:clamp(2.8rem,6.2vw,5rem);line-height:1;letter-spacing:-.05em;font-weight:600}
+  .hero h1 .serif{display:inline-block;font-size:1.1em;color:var(--blue);letter-spacing:-.025em}
+  .hero h1 .u{white-space:nowrap}
+  .lede{font-size:1.15rem;color:var(--ink-2);max-width:540px;margin:24px 0 32px}
+  .lede strong{color:var(--ink)}
+  .hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+  .price-line{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:32px;padding-top:24px;border-top:1px solid var(--line);font-size:.95rem;color:var(--ink-2)}
+  .price-line .big{font-size:1.7rem;font-weight:600;color:var(--ink);letter-spacing:-.04em;line-height:1}
+  .price-line .big small{font-size:.9rem;font-weight:500;color:var(--ink-3);letter-spacing:0;margin-left:2px}
+  .price-line .sep{width:1px;height:16px;background:var(--line-2)}
+  .price-line .free{display:inline-flex;align-items:center;gap:.4em;font-weight:550;color:var(--ink)}
+
+  /* tutor photos */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+  .shot{margin:0}
+  .shot img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:var(--r-4);background:var(--soft);box-shadow:var(--sh-2)}
+  .shot.b{margin-top:56px}
+  .shot figcaption{display:flex;flex-direction:column;padding:14px 4px 0;font-size:.86rem;color:var(--ink-3);line-height:1.35}
+  .shot figcaption b{font-size:1rem;color:var(--ink);letter-spacing:-.02em}
+
+  /* ================= PROOF STRIP ================= */
+  .proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .proof-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .proof-item{padding:28px;border-left:1px solid var(--line)}
+  .proof-item:first-child{border-left:0;padding-left:0}
+  .proof-item h3{font-size:1.02rem;font-weight:600;letter-spacing:-.015em;line-height:1.3}
+  .proof-item p{font-size:.9rem;color:var(--ink-3);margin-top:2px}
+
+  /* ================= TUTORS ================= */
+  .tutor-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .tutor{background:var(--card);border-radius:var(--r-4);padding:32px;border:1px solid var(--line);box-shadow:var(--sh-1);display:flex;flex-direction:column}
+  .t-top{display:grid;grid-template-columns:132px 1fr;gap:22px;align-items:end;margin-bottom:24px}
+  .t-photo{width:132px;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:var(--r-3);background:var(--soft)}
+  .badge-founder{display:inline-flex;align-items:center;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);background:var(--blue-tint);padding:5px 10px;border-radius:999px;margin-bottom:10px}
+  .badge-founder svg{display:none}
+  .tutor h3{font-size:1.9rem}
+  .t-role{font-size:.92rem;color:var(--ink-3);margin-top:6px;line-height:1.4}
+  .t-bio{color:var(--ink-2);font-size:1rem;line-height:1.7}
+  .t-bio strong{color:var(--ink)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin:24px 0}
+  .tag{font-size:.8rem;font-weight:500;padding:5px 11px;border-radius:999px;background:var(--soft);color:var(--ink-2)}
+  .t-foot{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;font-size:.92rem}
+  .t-foot .loc{display:inline-flex;align-items:center;gap:.45em;color:var(--ink-2);font-weight:500}
+  .t-foot .loc svg{width:16px;height:16px;color:var(--blue)}
+
+  /* more tutors */
+  .team-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;margin:72px 0 24px}
+  .team-head h3{font-size:1.5rem}
+  .team-head p{color:var(--ink-3);font-size:.95rem}
+  .team{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .mate{background:var(--card);border:1px solid var(--line);border-radius:var(--r-3);padding:22px}
+  .mate .av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--blue-tint);color:var(--blue);font-weight:600;font-size:.88rem;letter-spacing:.02em;margin-bottom:16px}
+  .mate h4{font-size:1.1rem;letter-spacing:-.02em}
+  .mate .sub{font-size:.82rem;color:var(--ink-3);margin-top:3px}
+  .mate p{font-size:.94rem;color:var(--ink-2);line-height:1.55;margin-top:12px}
+
+  /* ================= SERVICES (bento) ================= */
+  #services{background:var(--soft)}
+  .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+  .svc{position:relative;background:var(--card);border-radius:var(--r-4);padding:32px;border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;min-height:260px;transition:transform .25s ease,box-shadow .25s ease}
+  .svc:hover{transform:translateY(-2px);box-shadow:var(--sh-2)}
+  .svc.w4{grid-column:span 4}.svc.w2{grid-column:span 2}.svc.w3{grid-column:span 3}
+  .svc-img{margin:-32px -32px 26px;aspect-ratio:16/9;overflow:hidden;background:var(--soft)}
+  .svc-img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .svc:hover .svc-img img{transform:scale(1.03)}
+  .svc .pill{position:absolute;z-index:1;top:16px;right:16px;font-size:.76rem;font-weight:500;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--ink);box-shadow:0 1px 2px rgba(11,15,25,.14)}
+  .svc h3{font-size:1.5rem;margin:0 0 10px}
+  .svc p{color:var(--ink-2);font-size:.98rem}
+  .svc .who{margin-top:auto;padding-top:18px;font-size:.85rem;font-weight:500;color:var(--ink-3)}
+  .svc.feature{background:radial-gradient(560px 320px at 100% 0%,rgba(37,80,230,.55),transparent 72%),var(--ink);color:#fff;border-color:transparent}
+  .svc.feature .pill{background:rgba(255,255,255,.14);color:#fff}
+  .svc.feature h3{font-size:2.1rem;max-width:460px}
+  .svc.feature p{color:#C3C8D4;max-width:520px;font-size:1.05rem}
+  .svc.feature p strong{color:#fff}
+  .svc.feature .who{color:#9AA1B0}
+
+  /* ================= WHY ================= */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line-2)}
+  .why{padding:28px 28px 10px 0;border-right:1px solid var(--line)}
+  .why + .why{padding-left:28px}
+  .why:last-child{border-right:0}
+  .why .num{font-size:.85rem;font-weight:600;color:var(--blue);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+  .why h3{font-size:1.3rem;margin:16px 0 10px;letter-spacing:-.025em}
+  .why p{color:var(--ink-2);font-size:.98rem}
+  .checks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:56px}
+  .check{display:flex;gap:12px;align-items:flex-start;background:var(--soft);border-radius:var(--r-2);padding:18px}
+  .ck{flex:none;width:24px;height:24px;border-radius:50%;background:var(--blue-tint);color:var(--blue);display:grid;place-items:center}
+  .ck svg{width:13px;height:13px}
+  .check .ck{background:#fff}
+  .check h4{font-size:.98rem;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+  .check p{font-size:.86rem;color:var(--ink-3)}
+
+  /* ================= HOW ================= */
+  #how{background:var(--ink);color:#fff}
+  #how .kicker{color:var(--blue-on-dark)}
+  #how .s-head p{color:#A9B0BF}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;position:relative}
+  .steps::before{content:"";position:absolute;top:22px;left:22px;right:22px;border-top:1px solid rgba(255,255,255,.14)}
+  .step{position:relative}
+  .step-n{width:44px;height:44px;border-radius:50%;background:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.24);display:grid;place-items:center;font-weight:600;font-size:1rem;margin-bottom:24px}
+  .step:nth-child(2) .step-n{background:var(--blue);box-shadow:none}
+  .step h3{font-size:1.3rem;margin-bottom:10px;letter-spacing:-.025em}
+  .step p{color:#A9B0BF;font-size:.98rem}
+  .how-note{margin-top:56px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:22px 26px;border-radius:var(--r-3);background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+  .how-note p{color:#C9CEDA}
+  .how-note b{color:#fff}
+
+  /* ================= PRICING ================= */
+  .price-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:stretch}
+  .price{position:relative;background:var(--card);border-radius:var(--r-4);padding:44px;border:1px solid var(--line);box-shadow:var(--sh-2)}
+  .free-pill{position:absolute;top:40px;right:40px;font-size:.8rem;font-weight:600;padding:7px 13px;border-radius:999px;background:var(--blue-tint);color:var(--blue)}
+  .price .label{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .amt-row{display:flex;align-items:flex-end;gap:10px;margin:16px 0 10px}
+  .amt{font-size:clamp(4.6rem,9vw,6.4rem);font-weight:600;line-height:.85;letter-spacing:-.065em}
+  .amt sup{font-size:.4em;vertical-align:top;position:relative;top:.14em;margin-right:4px;font-weight:500;letter-spacing:0;color:var(--ink-3)}
+  .per{font-size:1.05rem;color:var(--ink-3);font-weight:500;padding-bottom:.4em}
+  .price-sub{color:var(--ink-2);font-size:1.05rem;margin-bottom:28px}
+  .price-sub strong{color:var(--ink)}
+  .incl{display:grid;grid-template-columns:1fr 1fr;gap:12px 22px;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:28px}
+  .incl li{display:flex;gap:10px;align-items:flex-start;font-size:.96rem;color:var(--ink-2);line-height:1.45}
+  .incl li .ck{width:20px;height:20px;margin-top:2px}
+  .incl li .ck svg{width:11px;height:11px}
+  .price .btn{width:100%}
+  .price-note{font-size:.86rem;color:var(--ink-3);text-align:center;margin-top:14px}
+  .promise{background:var(--soft);border-radius:var(--r-4);padding:44px;display:flex;flex-direction:column}
+  .promise h3{font-size:1.9rem;margin:14px 0 16px;line-height:1.12}
+  .promise h3 .serif{font-size:1.1em}
+  .promise p{color:var(--ink-2);line-height:1.7;font-size:1rem}
+  .promise .sig{font-family:var(--f-serif);font-style:italic;font-size:1.7rem;color:var(--ink);margin-top:20px;line-height:1}
+  .promise .btn{margin-top:auto;align-self:flex-start}
+
+  /* ================= FAQ ================= */
+  .faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+  .faq-grid .s-head{position:sticky;top:104px;margin-bottom:0}
+  .faq-contact{margin-top:28px;padding:20px 22px;border-radius:var(--r-2);background:var(--soft);font-size:.95rem;color:var(--ink-2)}
+  .faq-contact a{font-weight:550;color:var(--ink);border-bottom:1px solid var(--line-2)}
+  details{border-bottom:1px solid var(--line)}
+  details:first-child{border-top:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-weight:550;font-size:1.12rem;letter-spacing:-.02em}
+  summary::-webkit-details-marker{display:none}
+  summary .pm{flex:none;width:30px;height:30px;border-radius:50%;background:var(--soft);position:relative;transition:background .2s}
+  summary .pm::before,summary .pm::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.6px;background:var(--ink);transform:translate(-50%,-50%);transition:transform .25s,background .2s}
+  summary .pm::after{transform:translate(-50%,-50%) rotate(90deg)}
+  summary:hover .pm{background:var(--line-2)}
+  details[open] summary .pm{background:var(--ink)}
+  details[open] summary .pm::before,details[open] summary .pm::after{background:#fff}
+  details[open] summary .pm::after{transform:translate(-50%,-50%) rotate(0)}
+  .faq-a{padding:0 56px 24px 0;color:var(--ink-2);font-size:1rem}
+
+  /* ================= BOOK BAND ================= */
+  .band{position:relative;background-color:var(--blue);background-image:linear-gradient(180deg,rgba(37,80,230,.9) 0%,rgba(27,63,196,.7) 100%),url(images/toronto.jpg);background-size:cover;background-position:center 62%;color:#fff;border-radius:var(--r-4);padding:80px 48px;text-align:center;overflow:hidden}
+  .band::before{content:"";position:absolute;inset:0;background:radial-gradient(640px 320px at 50% 125%,rgba(255,255,255,.24),transparent 70%);pointer-events:none}
+  .band > *{position:relative}
+  .band h2{font-size:clamp(2.3rem,4.8vw,3.8rem);letter-spacing:-.045em}
+  .band h2 .serif{font-size:1.1em}
+  .band p{color:rgba(255,255,255,.88);font-size:1.1rem;max-width:520px;margin:18px auto 32px}
+  .band .btn{background:#fff;color:var(--ink);box-shadow:0 14px 30px -16px rgba(0,0,0,.5)}
+  .band .btn:hover{background:var(--ink);color:#fff}
+  .band .foot{margin-top:18px;font-size:.92rem;color:rgba(255,255,255,.88)}
+
+  /* ================= CONTACT ================= */
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}
+  .c-methods{display:flex;flex-direction:column;gap:10px;margin-top:32px}
+  .cm{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:var(--r-2);background:var(--card);border:1px solid var(--line);transition:border-color .2s}
+  a.cm:hover{border-color:var(--ink)}
+  .cm .ci{flex:none;width:40px;height:40px;border-radius:10px;background:var(--soft);color:var(--ink);display:grid;place-items:center}
+  .cm .ci svg{width:19px;height:19px}
+  .cm .cl{font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .cm .cv{font-weight:550;font-size:1rem}
+  .form-card{background:var(--card);border-radius:var(--r-4);padding:40px;border:1px solid var(--line);box-shadow:var(--sh-2)}
+  .form-card h3{font-size:1.7rem}
+  .fsub{color:var(--ink-2);margin:8px 0 26px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:.88rem;font-weight:550;margin-bottom:7px}
+  .field .opt{color:var(--ink-3);font-weight:400}
+  .field input,.field textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);padding:13px 15px;border-radius:12px;border:1px solid var(--line-2);background:var(--soft);transition:border-color .2s,box-shadow .2s,background .2s}
+  .field textarea{min-height:130px;resize:vertical}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px var(--blue-tint)}
+  .form-card .btn{width:100%;margin-top:6px}
+  .form-success{display:none;text-align:center;padding:30px 0}
+  .form-success.show{display:block}
+  .form-success .ck{width:60px;height:60px;margin:0 auto 18px}
+  .form-success .ck svg{width:28px;height:28px}
+  .form-success h3{margin-bottom:10px}
+  .form-success p{color:var(--ink-2)}
+
+  /* ================= FOOTER ================= */
+  footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px}
+  .foot-brand p{color:var(--ink-3);margin-top:12px;max-width:280px;font-size:.95rem}
+  .foot-col h4{font-size:.76rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:16px}
+  .foot-col a{display:block;padding:5px 0;font-size:.95rem;color:var(--ink-2);transition:color .15s}
+  .foot-col a:hover{color:var(--ink)}
+  .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line);font-size:.88rem;color:var(--ink-3)}
+
+  /* ================= MOBILE CTA BAR ================= */
+  .mbar{display:none}
+
+  /* ================= REVEAL ================= */
+  .js .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  .js .rv.in{opacity:1;transform:none}
+  .js .rv.d1{transition-delay:.06s}.js .rv.d2{transition-delay:.12s}.js .rv.d3{transition-delay:.18s}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .js .rv{opacity:1;transform:none}
+  }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width:1060px){
+    .nav-links{gap:20px;font-size:.9rem}
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .duo{max-width:520px;width:100%;margin:0 auto}
+    .proof-grid{grid-template-columns:1fr 1fr}
+    .proof-item:nth-child(3){border-left:0;padding-left:0}
+    .proof-item:nth-child(n+3){border-top:1px solid var(--line)}
+    .why-grid{grid-template-columns:1fr 1fr}
+    .why:nth-child(2){border-right:0}
+    .why:nth-child(3){padding-left:0}
+    .why:nth-child(n+3){border-top:1px solid var(--line)}
+    .checks{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr 1fr;gap:40px 28px}
+    .steps::before{display:none}
+    .tutor-grid,.price-grid,.contact-grid,.faq-grid{grid-template-columns:1fr}
+    .team{grid-template-columns:1fr 1fr}
+    .faq-grid{gap:32px}
+    .faq-grid .s-head{position:static}
+  }
+  @media (max-width:860px){
+    .nav-links,.nav-cta .login,.nav-cta .btn{display:none}
+    .hamburger{display:inline-flex}
+    .sec{padding:84px 0}
+    .bento{grid-template-columns:1fr}
+    .sec-top{grid-template-columns:1fr;gap:32px;margin-bottom:40px}
+    .sec-pic img{aspect-ratio:16/9;border-radius:var(--r-3)}
+    .svc.w4,.svc.w2,.svc.w3{grid-column:auto}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .foot-brand{grid-column:1 / -1}
+    .mbar{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:40;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 20px;border-radius:999px;background:var(--ink);color:#fff;box-shadow:0 18px 40px -16px rgba(11,15,25,.6);transform:translateY(140%);transition:transform .3s ease}
+    .mbar.show{transform:none}
+    .mbar .mp{font-size:.8rem;color:#A9B0BF;line-height:1.25}
+    .mbar .mp b{display:block;font-size:1.1rem;letter-spacing:-.03em;color:#fff}
+    .mbar .btn{padding:12px 18px;min-height:46px;font-size:.95rem}
+    footer{padding-bottom:110px}
+  }
+  @media (max-width:560px){
+    body{font-size:16px}
+    .wrap{padding:0 16px}
+    .hero{padding:44px 0 64px}
+    .lede{font-size:1.06rem}
+    .hero-cta .btn{width:100%}
+    .hero-cta .link-arrow{margin:4px auto 0}
+    .ann-x{display:none}
+    .price-line{gap:8px 14px}
+    .price-line .sep{display:none}
+    .price-line .big{width:100%}
+    .duo{gap:10px}
+    .shot img{border-radius:var(--r-3)}
+    .shot.b{margin-top:32px}
+    .shot figcaption{padding-top:10px;font-size:.82rem}
+    .proof-grid{grid-template-columns:1fr}
+    .proof-item{border-left:0!important;padding:16px 0!important;border-top:1px solid var(--line)}
+    .proof-item:first-child{border-top:0}
+    .tutor{padding:22px}
+    .t-top{grid-template-columns:104px 1fr;gap:16px}
+    .t-photo{width:104px;border-radius:var(--r-2)}
+    .tutor h3{font-size:1.6rem}
+    .team-head{margin-top:56px}
+    .team{grid-template-columns:1fr;gap:10px}
+    .mate{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:18px}
+    .mate .av{margin-bottom:0}
+    .why-grid{grid-template-columns:1fr}
+    .why,.why + .why{padding:24px 0 14px;border-right:0}
+    .why + .why{border-top:1px solid var(--line)}
+    .checks{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .svc{padding:26px;min-height:0}
+    .svc .pill{top:12px;right:12px}
+    .svc-img{margin:-26px -26px 22px}
+    .svc.feature h3{font-size:1.7rem}
+    .price,.promise,.form-card{padding:28px 22px}
+    .free-pill{position:static;display:inline-block;margin-bottom:14px}
+    .price .label{display:block}
+    .incl{grid-template-columns:1fr}
+    .band{padding:56px 22px}
+    .faq-a{padding-right:0}
+    summary{font-size:1.05rem}
+    .how-note .btn{width:100%}
+  }
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announce"><span class="dot" aria-hidden="true"></span>Now accepting students for <b>Winter 2027</b><span class="ann-x"> · Book now for a chance to win your first hour free</span></div>
+
+<!-- HEADER -->
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="HugoPrep home"><span class="h">Hugo</span><span class="p">Prep</span></a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#tutors">Tutors</a>
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://calendly.com/hugobprep/free-initial-meeting" target="_blank" rel="noopener" class="btn btn-cta">Book a Free Intro</a>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" id="hamburger"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <a href="#tutors">Tutors</a>
+  <a href="#services">Services</a>
+  <a href="#why">Why Us</a>
+  <a href="#how">How It Works</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact">Contact</a>
+  <a href="https://calendly.com/hugobprep/free-initial-meeting" target="_blank" rel="noopener" class="btn btn-cta">Book a Free Intro</a>
+</nav>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="tagline">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Toronto</span>
+        <span class="chip">Ages 6-14</span>
+        <span class="chip">Online &amp; Local Libraries</span>
+      </div>
+      <h1>Tutoring built for students, <span class="serif">by <span class="u">top students.</span></span></h1>
+      <p class="lede">We're Hugo and Ryan, two <strong>Grade 9 UTS students</strong> in Toronto and <strong>gold medalists at the 2026 Toronto Science Fair</strong>. We help kids <strong>ages 6 to 14</strong> with schoolwork, big tests like the UTS entrance exam, and science fair projects.</p>
+      <div class="hero-cta">
+        <a href="https://calendly.com/hugobprep/free-initial-meeting" target="_blank" rel="noopener" class="btn btn-cta btn-lg">Book a Free Intro
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#tutors" class="link-arrow">Meet your tutors</a>
+      </div>
+      <div class="price-line">
+        <span class="big">$40<small>/hour</small></span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="free">Book now for a chance to win your first hour free</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span>No contracts</span>
+      </div>
+    </div>
+
+    <div class="duo" aria-label="Photos of Hugo and Ryan">
+      <figure class="shot a">
+        <img src="images/hugo.jpg" alt="Hugo Bui, HugoPrep founder" width="400" height="500" />
+        <figcaption><b>Hugo Bui</b><span>Founder, all subjects</span></figcaption>
+      </figure>
+      <figure class="shot b">
+        <img src="images/ryan.jpg" alt="Ryan Zander, HugoPrep tutor" width="400" height="500" />
+        <figcaption><b>Ryan Zander</b><span>Math and science</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<section class="proof" aria-label="Highlights">
+  <div class="wrap proof-grid">
+    <div class="proof-item rv">
+      <div><h3>Gold Medalists</h3><p>2026 Toronto Science Fair</p></div>
+    </div>
+    <div class="proof-item rv d1">
+      <div><h3>UTS Students</h3><p>One of Canada's top schools</p></div>
+    </div>
+    <div class="proof-item rv d2">
+      <div><h3>Math &amp; Science Experts</h3><p>AI research, science fairs &amp; more</p></div>
+    </div>
+    <div class="proof-item rv d3">
+      <div><h3>Peer Tutors</h3><p>Learn from students who get it</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TUTORS -->
+<section id="tutors" class="sec">
+  <div class="wrap">
+    <div class="s-head rv">
+      <span class="kicker">Meet your tutors</span>
+      <h2>Tutors who <span class="serif">get it.</span></h2>
+      <p>Not a faceless agency. Every tutor is a UTS student. Hugo and Ryan started HugoPrep, and the team has grown since.</p>
+    </div>
+    <div class="tutor-grid">
+      <article class="tutor navy rv">
+        <div class="t-top">
+          <img class="t-photo" src="images/hugo.jpg" alt="Hugo Bui, HugoPrep founder and tutor" loading="lazy" width="150" height="188" />
+          <div>
+            <span class="badge-founder"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>Founder</span>
+            <h3>Hugo Bui</h3>
+            <div class="t-role">All Subjects &amp; Science Fair Coach · Grades 1-8</div>
+          </div>
+        </div>
+        <p class="t-bio">I'm Hugo, the <strong>founder of HugoPrep</strong>. I still remember being stuck on a problem and too nervous to put my hand up, so I try to be the tutor I wanted back then. I teach <strong>all core subjects for grades 1 to 8</strong>: math, science, English and French. I care way more about kids getting <strong>why something works</strong> than memorizing it for Friday's test. I also coach UTS entrance prep, gifted program prep, and science fair projects from the first idea to the final board. My own project, an AI system that predicts wildfire smoke, won <strong>Gold at the 2026 Toronto Science Fair</strong>. Catching up, getting ahead, or prepping for something big, we start wherever your kid is.</p>
+        <div class="tags">
+          <span class="tag">All subjects</span><span class="tag">French</span><span class="tag">UTS prep</span><span class="tag">Gifted prep</span><span class="tag">Science fair coaching</span><span class="tag">Former TA</span><span class="tag">Researcher</span>
+        </div>
+        <div class="t-foot">
+          <span class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Online or at a local library</span>
+        </div>
+      </article>
+      <article class="tutor coral rv d1">
+        <div class="t-top">
+          <img class="t-photo" src="images/ryan.jpg" alt="Ryan Zander, HugoPrep tutor" loading="lazy" width="150" height="188" />
+          <div>
+            <h3>Ryan Zander</h3>
+            <div class="t-role">Math &amp; Science Tutor · Grades 1-8</div>
+          </div>
+        </div>
+        <p class="t-bio">I tutor <strong>math and science for grades 1 to 8</strong>, plus UTS entrance prep and science fair coaching. I go one step at a time and don't move on until it makes sense, because rushing is how kids end up lost. I was a <strong>TA at Brain Power</strong>, where I helped run an interview prep course for 24 students, so I'm used to teaching a full class and one kid at a time. I also built an AI wildfire smoke prediction system that won <strong>Gold at the 2026 Toronto Science Fair</strong>. Math and science are my thing, and I love the moment it <strong>actually clicks</strong> for someone.</p>
+        <div class="tags">
+          <span class="tag">Math</span><span class="tag">Science</span><span class="tag">UTS prep</span><span class="tag">Science fair coaching</span><span class="tag">Former TA</span><span class="tag">AI researcher</span><span class="tag">Coding</span>
+        </div>
+        <div class="t-foot">
+          <span class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Online or at a local library</span>
+          <a class="link-arrow" href="https://zander.life" target="_blank" rel="noopener">View full portfolio</a>
+        </div>
+      </article>
+    </div>
+    <div class="team-head rv">
+      <h3>More tutors on the team</h3>
+      <p>All UTS students. We'll match your child with whoever fits best.</p>
+    </div>
+    <div class="team">
+      <article class="mate rv">
+        <div class="av" aria-hidden="true">TS</div>
+        <div>
+          <h4>Theo Sarris</h4>
+          <div class="sub">All subjects · UTS prep</div>
+          <p>Takes on any core subject, with math and English at the top of the list. Has worked with kids before.</p>
+        </div>
+      </article>
+      <article class="mate rv d1">
+        <div class="av" aria-hidden="true">DL</div>
+        <div>
+          <h4>Derek Li</h4>
+          <div class="sub">All subjects · UTS prep</div>
+          <p>Happy to cover every subject and especially strong in math and English. Used to working with younger students.</p>
+        </div>
+      </article>
+      <article class="mate rv d2">
+        <div class="av" aria-hidden="true">EN</div>
+        <div>
+          <h4>Ethan Nho</h4>
+          <div class="sub">All subjects · UTS prep</div>
+          <p>Likes a bit of everything, with math and English as the best two. Has experience working with kids.</p>
+        </div>
+      </article>
+      <article class="mate rv d3">
+        <div class="av" aria-hidden="true">AF</div>
+        <div>
+          <h4>Aymeric Foucault</h4>
+          <div class="sub">All subjects · UTS prep</div>
+          <p>Covers the full range of subjects and does best in math and English. Has spent time working with kids.</p>
+        </div>
+      </article>
+      <article class="mate rv">
+        <div class="av" aria-hidden="true">RL</div>
+        <div>
+          <h4>Ronny Li</h4>
+          <div class="sub">All subjects · UTS prep</div>
+          <p>Math and English are the strong suits, but any subject is fair game. Has worked with younger kids before.</p>
+        </div>
+      </article>
+      <article class="mate rv d1">
+        <div class="av" aria-hidden="true">IG</div>
+        <div>
+          <h4>Ilya Ganjali</h4>
+          <div class="sub">All subjects · UTS prep</div>
+          <p>Enjoys tutoring all subjects. Math and English come easiest, and working with kids is familiar ground.</p>
+        </div>
+      </article>
+      <article class="mate rv d2">
+        <div class="av" aria-hidden="true">IR</div>
+        <div>
+          <h4>Iman Ali Raza</h4>
+          <div class="sub">All subjects · UTS prep</div>
+          <p>Strong in English and math, and glad to help with the rest too. Comes with experience working with kids.</p>
+        </div>
+      </article>
+      <article class="mate rv d3">
+        <div class="av" aria-hidden="true">MY</div>
+        <div>
+          <h4>Martin Yousseff</h4>
+          <div class="sub">All subjects · UTS prep</div>
+          <p>Good at math, good at English, and up for any other subject. No stranger to working with kids.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="sec">
+  <div class="wrap">
+    <div class="s-head rv">
+      <span class="kicker">Services</span>
+      <h2>Learn in <span class="serif">less time.</span></h2>
+      <p>Four things we're good at. Pick one, or tell us what's going on and we'll figure it out together.</p>
+    </div>
+    <div class="bento">
+      <article class="svc w3 rv">
+        <span class="pill">Grades 1-8</span>
+        <div class="svc-img"><img src="images/svc-all-subjects.jpg" alt="A stack of colourful school books" width="1040" height="585" loading="lazy" decoding="async" /></div>
+        <h3>All-Subject Tutoring</h3>
+        <p>Math, science, English, and more. We cover all core subjects for grades 1 to 8 and focus on understanding the material, so homework stops being a fight.</p>
+        <div class="who">Hugo, Ryan and the team</div>
+      </article>
+      <article class="svc w3 rv d1">
+        <span class="pill">Exam &amp; Interview</span>
+        <div class="svc-img"><img src="images/svc-uts-prep.jpg" alt="A pencil resting on a multiple-choice answer sheet" width="1040" height="585" loading="lazy" decoding="async" /></div>
+        <h3>UTS Entrance Prep</h3>
+        <p>Every tutor here goes to UTS. We all took the entrance exam, so we know what they're looking for. We'll help you prep for the exam and interview so you walk in confident.</p>
+        <div class="who">The whole team</div>
+      </article>
+      <article class="svc w3 rv">
+        <span class="pill">Screening &amp; Testing</span>
+        <div class="svc-img"><img src="images/svc-gifted.jpg" alt="A black knight chess piece on a board" width="1040" height="585" loading="lazy" decoding="async" /></div>
+        <h3>Gifted Program Prep</h3>
+        <p>Gifted screening coming up? We'll go over what the test actually looks like and practice the kinds of questions on it, so your kid walks in calm instead of cramming the night before.</p>
+        <div class="who">Hugo</div>
+      </article>
+      <article class="svc w3 rv d1">
+        <span class="pill">Class &amp; Projects</span>
+        <div class="svc-img"><img src="images/svc-science.jpg" alt="Close-up of the lenses on a microscope" width="1040" height="585" loading="lazy" decoding="async" /></div>
+        <h3>Science Tutoring &amp; Fair Coaching</h3>
+        <p>Help with science class, plus coaching for science fair projects from the first idea to the final board.</p>
+        <div class="who">Hugo &amp; Ryan</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" class="sec">
+  <div class="wrap">
+    <div class="sec-top">
+      <div class="s-head rv">
+        <span class="kicker">Why HugoPrep</span>
+        <h2>Get the best with <span class="serif">real student tutors.</span></h2>
+        <p>What makes learning with us different from the rest.</p>
+      </div>
+      <figure class="sec-pic rv d1"><img src="images/why-homework.jpg" alt="Handwritten math homework on graph paper" width="1000" height="700" loading="lazy" decoding="async" /></figure>
+    </div>
+    <div class="why-grid">
+      <article class="why rv"><div class="num">01</div><h3>Current Students</h3><p>We're not remembering school from ten years ago, we're living it right now. We know the current curriculum, test formats, and what teachers actually look for.</p></article>
+      <article class="why rv d1"><div class="num">02</div><h3>Been Through It</h3><p>UTS admissions, gifted testing, science fairs: we went through them recently. We'll tell you what actually helped us and what was a waste of time.</p></article>
+      <article class="why rv d2"><div class="num">03</div><h3>Peer Connection</h3><p>Kids learn better when comfortable. We're close in age to our students, so it feels more like working with a helpful older sibling than sitting in another class.</p></article>
+      <article class="why rv d3"><div class="num">04</div><h3>Proven Track Record</h3><p>Every tutor is a UTS student, at one of Canada's top schools. HugoPrep was started by two of them, both Toronto Science Fair gold medalists.</p></article>
+    </div>
+    <div class="checks">
+      <div class="check rv"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><h4>A Team of Tutors</h4><p>Matched to your child's needs</p></div></div>
+      <div class="check rv d1"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><h4>All Subjects</h4><p>Math, Science, English &amp; more</p></div></div>
+      <div class="check rv d2"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><h4>Free Consultation</h4><p>No commitment, just a conversation</p></div></div>
+      <div class="check rv d3"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><h4>One Flat Rate</h4><p>$40/hr, no hidden fees</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="sec">
+  <div class="wrap">
+    <div class="sec-top">
+      <div class="s-head rv">
+        <span class="kicker">How it works</span>
+        <h2>Easy and <span class="serif">convenient.</span></h2>
+        <p>Getting started is simple. No complicated sign-ups, no contracts, no pressure.</p>
+      </div>
+      <figure class="sec-pic rv d1"><img src="images/how-desk.jpg" alt="A laptop, notebooks and pens on a white desk" width="1000" height="700" loading="lazy" decoding="async" /></figure>
+    </div>
+    <div class="steps">
+      <div class="step rv"><div class="step-n">1</div><h3>Reach Out</h3><p>Send us an email or give us a call. Tell us a bit about what you or your child needs help with, the subject, the grade, whatever's on your mind.</p></div>
+      <div class="step rv d1"><div class="step-n">2</div><h3>Free Intro Chat</h3><p>We'll set up a quick introductory conversation (totally free) to understand the student's goals and figure out the best plan. Parents are welcome to join.</p></div>
+      <div class="step rv d2"><div class="step-n">3</div><h3>Get Matched</h3><p>We'll pair your child with the tutor who fits best, depending on the subject and who they click with.</p></div>
+      <div class="step rv d3"><div class="step-n">4</div><h3>Start Learning</h3><p>Sessions begin with flexible scheduling, online or at a local library. We'll adjust the plan as we go based on what's working.</p></div>
+    </div>
+    <div class="how-note rv">
+      <p><b>The first consultation is always free.</b> No commitment, just a conversation to see if we're a good fit.</p>
+      <a href="https://calendly.com/hugobprep/free-initial-meeting" target="_blank" rel="noopener" class="btn btn-cta">Book a Free Intro
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="sec">
+  <div class="wrap">
+    <div class="s-head rv">
+      <span class="kicker">Pricing</span>
+      <h2>Simple, <span class="serif">honest pricing.</span></h2>
+      <p>One straightforward rate for all services. No hidden fees, no packages to figure out.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price rv">
+        <span class="free-pill">Chance to win a free hour</span>
+        <span class="label">Per hour · All services included</span>
+        <div class="amt-row"><span class="amt"><sup>$</sup>40</span><span class="per">/ hour</span></div>
+        <p class="price-sub">One flat rate. No packages, no upsells. <strong>Book now for a chance to win your first hour free.</strong></p>
+        <ul class="incl">
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>All-subject tutoring (math, science, English &amp; more)</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Science tutoring &amp; science fair coaching</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>UTS entrance exam &amp; interview prep</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Gifted program screening &amp; test prep</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Sessions online or at local libraries</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Free introductory consultation</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Flexible scheduling, no contracts</li>
+        </ul>
+        <a href="https://calendly.com/hugobprep/free-initial-meeting" target="_blank" rel="noopener" class="btn btn-cta btn-lg">Book a Free Intro
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="price-note">No contracts. Cancel anytime. The intro chat is free.</p>
+      </div>
+      <div class="promise rv d1">
+        <span class="kicker">Our promise</span>
+        <h3>We're committed to <span class="serif">your success.</span></h3>
+        <p>If after your first two sessions you don't feel like we're a good fit, we can pause without any awkwardness. We want you to feel confident that you're making a good choice. Your kid's learning matters too much for anything less.</p>
+        <div class="sig">Hugo &amp; Ryan</div>
+        <a href="https://calendly.com/hugobprep/free-initial-meeting" target="_blank" rel="noopener" class="btn btn-cta" style="margin-top:28px">Book a Free Intro
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="sec" style="padding-top:24px">
+  <div class="wrap faq-grid">
+    <div class="s-head rv">
+      <span class="kicker">FAQ</span>
+      <h2>Questions? <span class="serif">We've got answers.</span></h2>
+      <p>Common questions from parents and students. Still curious? Just reach out.</p>
+      <div class="faq-contact">Something not covered here? Email <a href="mailto:hugobprep@gmail.com">hugobprep@gmail.com</a> or call <a href="tel:+14169306262">416-930-6262</a>.</div>
+    </div>
+    <div class="faq-list rv d1">
+      <details><summary>What subjects do you tutor?<span class="pm" aria-hidden="true"></span></summary><div class="faq-a">We cover all core subjects for grades 1-8: math, science, English, and French. On top of that, we offer specialized prep for the UTS entrance exam, gifted program testing, and science fair projects. Hugo covers every subject; Ryan focuses on math and science.</div></details>
+      <details><summary>Who are the tutors?<span class="pm" aria-hidden="true"></span></summary><div class="faq-a">HugoPrep was started by Hugo Bui and Ryan Zander, two Grade 9 students at UTS (one of Canada's top schools) and gold medalists at the 2026 Toronto Science Fair. The team now has eight more tutors, all UTS students who also tutor UTS entrance prep. They're listed in the Tutors section. Because we're current students, we teach the exact curriculum and admissions processes your child is facing right now.</div></details>
+      <details><summary>How much does tutoring cost?<span class="pm" aria-hidden="true"></span></summary><div class="faq-a">A flat $40 per hour for everything: regular tutoring, UTS prep, gifted prep, and science fair coaching all cost the same. The intro consultation is free, and there are no contracts or hidden fees. Book now for a chance to win your first hour free.</div></details>
+      <details><summary>Can we do online sessions?<span class="pm" aria-hidden="true"></span></summary><div class="faq-a">Absolutely. Sessions run online or in person at local libraries, whichever works best for your family's schedule and location.</div></details>
+      <details><summary>How do we get started?<span class="pm" aria-hidden="true"></span></summary><div class="faq-a">Book a free intro on our scheduling page, or send a message using the form below. We'll set up a quick intro chat, learn about your child's goals, match them with the right tutor, and book the first session.</div></details>
+      <details><summary>What makes you different from other tutors?<span class="pm" aria-hidden="true"></span></summary><div class="faq-a">We're top students teaching the exact material we're learning right now, so our knowledge is current and our advice is real. Being close in age also means kids feel comfortable asking questions, and our gold medals and UTS spots prove the approach works.</div></details>
+      <details><summary>How long are sessions?<span class="pm" aria-hidden="true"></span></summary><div class="faq-a">Sessions are typically one hour, which works well for most students. We can adjust the length based on age, attention span, and goals, so just let us know what works best for your family.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK NOW -->
+<section id="book" class="wrap" style="padding-bottom:112px">
+  <div class="band rv">
+    <h2>Ready to <span class="serif">get started?</span></h2>
+    <p>Choose a time that works for you. The first consultation is 100% free.</p>
+    <a href="https://calendly.com/hugobprep/free-initial-meeting" target="_blank" rel="noopener" class="btn btn-lg">Book a Free Intro
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <div class="foot">Not sure who's the best fit? Book a free intro and we'll match your child to the right tutor.</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec" style="padding-top:0">
+  <div class="wrap contact-grid">
+    <div class="rv">
+      <div class="s-head" style="margin-bottom:0">
+        <span class="kicker">Let's connect</span>
+        <h2>Get in <span class="serif">touch.</span></h2>
+        <p>Parent or student, just reach out. We usually reply within a day.</p>
+      </div>
+      <div class="c-methods">
+        <a class="cm" href="mailto:hugobprep@gmail.com">
+          <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
+          <div><div class="cl">Email</div><div class="cv">hugobprep@gmail.com</div></div>
+        </a>
+        <a class="cm" href="tel:+14169306262">
+          <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></div>
+          <div><div class="cl">Phone</div><div class="cv">416-930-6262</div></div>
+        </a>
+        <div class="cm">
+          <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="cl">Location</div><div class="cv">Online and at local libraries</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-card rv d1">
+      <form id="contactForm">
+        <h3>Send a message</h3>
+        <p class="fsub">We'll reply within a day to set up your free intro.</p>
+        <div class="field"><label for="name">Your name</label><input type="text" id="name" name="name" placeholder="e.g. Jamie Smith" autocomplete="name" required /></div>
+        <div class="field"><label for="email">Email address</label><input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required /></div>
+        <div class="field"><label for="phone">Phone number <span class="opt">(optional)</span></label><input type="tel" id="phone" name="phone" placeholder="416-000-0000" autocomplete="tel" /></div>
+        <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us about your child's grade, subjects, and goals..." required></textarea></div>
+        <button type="submit" class="btn btn-cta btn-lg">Send Message
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+      <div class="form-success" id="formSuccess" role="status">
+        <div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Almost there!</h3>
+        <p>Your email app should now be open with your message ready to send. If not, just email us at <strong>hugobprep@gmail.com</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="logo"><span class="h">Hugo</span><span class="p">Prep</span></a>
+        <p>Personalized tutoring from students who get it. Online and at local libraries.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="#tutors">Tutors</a>
+        <a href="#services">Services</a>
+        <a href="#why">Why Us</a>
+        <a href="#how">How It Works</a>
+      </div>
+      <div class="foot-col">
+        <h4>More</h4>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#book">Book Now</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="mailto:hugobprep@gmail.com">hugobprep@gmail.com</a>
+        <a href="tel:+14169306262">416-930-6262</a>
+        <a href="https://calendly.com/hugobprep/free-initial-meeting" target="_blank" rel="noopener">Book a Free Intro</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> HugoPrep · Toronto, Ontario</span>
+      <span>Tutoring built for students, by students.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE STICKY CTA -->
+<div class="mbar" id="mbar">
+  <div class="mp"><b>$40/hr</b>Chance to win a free hour</div>
+  <a href="https://calendly.com/hugobprep/free-initial-meeting" target="_blank" rel="noopener" class="btn btn-cta">Book a Free Intro</a>
+</div>
+
+<script>
+  // header border on scroll + mobile CTA bar after hero
+  const header = document.getElementById('top');
+  const mbar = document.getElementById('mbar');
+  const hero = document.querySelector('.hero');
+  const onScroll = () => {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+    const pastHero = hero.getBoundingClientRect().bottom < 0;
+    const nearEnd = (window.innerHeight + window.scrollY) > document.body.scrollHeight - 700;
+    mbar.classList.toggle('show', pastHero && !nearEnd);
+  };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // mobile menu
+  const ham = document.getElementById('hamburger');
+  const setMenu = open => { document.body.classList.toggle('menu-open', open); ham.setAttribute('aria-expanded', open); };
+  ham.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+  // FAQ: one open at a time
+  const items = document.querySelectorAll('.faq-list details');
+  items.forEach(d => d.addEventListener('toggle', () => { if (d.open) items.forEach(o => { if (o !== d) o.open = false; }); }));
+
+  // reveal on scroll
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.rv').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.rv').forEach(el => el.classList.add('in'));
+  }
+
+  // contact form -> mailto
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const v = id => document.getElementById(id).value.trim();
+    const name = v('name'), email = v('email'), phone = v('phone'), message = v('message');
+    const subject = encodeURIComponent('Tutoring inquiry from ' + (name || 'a parent'));
+    const body = encodeURIComponent('Name: ' + name + '\n' + 'Email: ' + email + '\n' + 'Phone: ' + (phone || 'Not provided') + '\n\n' + 'Message:\n' + message);
+    window.location.href = 'mailto:hugobprep@gmail.com?subject=' + subject + '&body=' + body;
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<!-- Vercel Web Analytics (static-site snippet). Enable "Web Analytics" for this project in the Vercel dashboard. -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

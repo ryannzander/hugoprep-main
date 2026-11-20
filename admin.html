@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin | HugoPrep</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/theme.css" />
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="lg-hugo">Hugo</span><span class="lg-prep">Prep</span></a>
+    <div class="nav-cta">
+      <span id="userEmailLabel" style="font-size:.88rem;color:var(--ink-soft);font-weight:600;margin-right:4px;"></span>
+      <button class="btn btn-ghost" id="logoutBtn">Log Out</button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+  <div class="wrap" style="max-width:900px">
+
+    <!-- Not connected to backend yet -->
+    <div id="notConfigured" style="display:none">
+      <div class="shell-head"><h1>Admin Dashboard</h1></div>
+      <div class="card" id="notConfiguredCard"></div>
+    </div>
+
+    <div id="loadingState" class="loading-spin">Loading...</div>
+
+    <!-- Access denied -->
+    <div id="deniedState" style="display:none">
+      <div class="shell-head">
+        <h1>Access denied</h1>
+        <p>This page is only visible to HugoPrep admins.</p>
+      </div>
+    </div>
+
+    <!-- Admin view -->
+    <div id="adminState" style="display:none">
+      <div class="shell-head">
+        <h1>Pending Sign-Ups</h1>
+        <p>Approve students after they've completed their free 15-minute intro call.</p>
+      </div>
+
+      <div class="card" style="margin-bottom:24px">
+        <table class="admin-table">
+          <thead>
+            <tr><th>Name</th><th>Phone</th><th>Signed Up</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody id="pendingRows"></tbody>
+        </table>
+        <div class="empty-state" id="pendingEmpty" style="display:none">No pending sign-ups right now.</div>
+      </div>
+
+      <div class="shell-head" style="margin-bottom:20px">
+        <h1 style="font-size:1.5rem">Approved Students</h1>
+        <p>The free first hour is a draw prize now, not automatic. This column tracks who has had their first session.</p>
+      </div>
+      <div class="card">
+        <table class="admin-table">
+          <thead>
+            <tr><th>Name</th><th>Phone</th><th>Signed Up</th><th>Status</th><th>First Session</th></tr>
+          </thead>
+          <tbody id="approvedRows"></tbody>
+        </table>
+        <div class="empty-state" id="approvedEmpty" style="display:none">No approved students yet.</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="simple">© <span id="year"></span> HugoPrep · Toronto, Ontario</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const loadingState = document.getElementById('loadingState');
+  const deniedState = document.getElementById('deniedState');
+  const adminState = document.getElementById('adminState');
+  const notConfigured = document.getElementById('notConfigured');
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    if (isSupabaseConfigured) await supabaseClient.auth.signOut();
+    window.location.href = 'login.html';
+  });
+
+  function fmtDate(iso) {
+    return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str ?? '';
+    return div.innerHTML;
+  }
+
+  function nameCell(p) {
+    const fullName = [p.first_name, p.last_name].filter(Boolean).join(' ');
+    const name = fullName ? escapeHtml(fullName) : '<span style="color:var(--ink-faint)">-</span>';
+    return `<div style="font-weight:700">${name}</div><div style="font-size:.82rem;color:var(--ink-faint)">${escapeHtml(p.email)}</div>`;
+  }
+
+  async function loadProfiles() {
+    const { data: profiles, error } = await supabaseClient
+      .from('profiles')
+      .select('id, email, first_name, last_name, phone, approved, first_session_used, created_at')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    const pending = profiles.filter(p => !p.approved);
+    const approved = profiles.filter(p => p.approved);
+
+    const pendingRows = document.getElementById('pendingRows');
+    const pendingEmpty = document.getElementById('pendingEmpty');
+    pendingRows.innerHTML = '';
+    pendingEmpty.style.display = pending.length ? 'none' : 'block';
+    pending.forEach(p => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${nameCell(p)}</td>
+        <td>${p.phone ? escapeHtml(p.phone) : '-'}</td>
+        <td>${fmtDate(p.created_at)}</td>
+        <td><span class="pill-sm pending">Pending</span></td>
+        <td><button class="btn btn-primary" style="padding:.5em 1.1em;font-size:.85rem" data-id="${p.id}">Approve</button></td>
+      `;
+      pendingRows.appendChild(tr);
+    });
+
+    pendingRows.querySelectorAll('button[data-id]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        btn.textContent = 'Approving...';
+        const { error } = await supabaseClient
+          .from('profiles')
+          .update({ approved: true })
+          .eq('id', btn.dataset.id);
+        if (error) {
+          alert('Could not approve: ' + error.message);
+          btn.disabled = false;
+          btn.textContent = 'Approve';
+          return;
+        }
+        loadProfiles();
+      });
+    });
+
+    const approvedRows = document.getElementById('approvedRows');
+    const approvedEmpty = document.getElementById('approvedEmpty');
+    approvedRows.innerHTML = '';
+    approvedEmpty.style.display = approved.length ? 'none' : 'block';
+    approved.forEach(p => {
+      const tr = document.createElement('tr');
+      const freeSessionCell = p.first_session_used
+        ? '<span class="pill-sm approved">Done</span>'
+        : `<span class="pill-sm pending" style="margin-right:8px">Not yet</span><button class="btn btn-ghost" style="padding:.4em .9em;font-size:.8rem" data-used-id="${p.id}">Mark Done</button>`;
+      tr.innerHTML = `
+        <td>${nameCell(p)}</td>
+        <td>${p.phone ? escapeHtml(p.phone) : '-'}</td>
+        <td>${fmtDate(p.created_at)}</td>
+        <td><span class="pill-sm approved">Approved</span></td>
+        <td>${freeSessionCell}</td>
+      `;
+      approvedRows.appendChild(tr);
+    });
+
+    approvedRows.querySelectorAll('button[data-used-id]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+        const { error } = await supabaseClient
+          .from('profiles')
+          .update({ first_session_used: true })
+          .eq('id', btn.dataset.usedId);
+        if (error) {
+          alert('Could not update: ' + error.message);
+          btn.disabled = false;
+          btn.textContent = 'Mark Done';
+          return;
+        }
+        loadProfiles();
+      });
+    });
+  }
+
+  (async () => {
+    if (!isSupabaseConfigured) {
+      loadingState.style.display = 'none';
+      notConfigured.style.display = 'block';
+      document.getElementById('notConfiguredCard').innerHTML =
+        '<p style="color:var(--ink-soft)">This page isn\'t connected to the account system yet. (Missing Supabase project URL/key in <code>js/supabase-client.js</code>.) Once that\'s set up, this dashboard will list every pending sign-up here.</p>';
+      return;
+    }
+
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session) {
+      window.location.href = 'login.html';
+      return;
+    }
+    document.getElementById('userEmailLabel').textContent = session.user.email;
+
+    const { data: profile, error } = await supabaseClient
+      .from('profiles')
+      .select('is_admin')
+      .eq('id', session.user.id)
+      .single();
+
+    loadingState.style.display = 'none';
+
+    if (error || !profile || !profile.is_admin) {
+      deniedState.style.display = 'block';
+      return;
+    }
+
+    adminState.style.display = 'block';
+    loadProfiles();
+  })();
+</script>
+</body>
+</html>
